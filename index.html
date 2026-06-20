@@ -424,20 +424,20 @@ body {
 <script>
 // === 数据 ===
 const drinks = [
-  { id: 1,  name: '青野汐沫',   desc: '抹茶味、口感绵密',                                                         price: 38, level: 2, img: '_images/page1_img1.jpeg' },
-  { id: 2,  name: '椰林飘香',   desc: '浓郁顺滑、椰香四溢、热带风情、甜美迷人',                                 price: 38, level: 2, img: '_images/page1_img2.jpeg' },
-  { id: 3,  name: '莫吉托',     desc: '薄荷清凉、酸甜平衡、海明威最爱的古巴国民饮品',                           price: 38, level: 2, img: '_images/page1_img3.jpeg' },
-  { id: 4,  name: '少女百利甜', desc: '奶香、酒香、可可香完美融合，口感绵密，入口即化',                         price: 28, level: 2, img: '_images/page1_img4.jpeg' },
-  { id: 5,  name: '碳酸冰岛',   desc: '雪碧的清爽，蓝橙的柑橘香',                                               price: 28, level: 2, img: '_images/page1_img5.jpeg' },
-  { id: 6,  name: '拉莫斯金菲士', desc: '清新柑橘，奶香柔滑，带有橙花的淡雅芬芳，气泡轻盈，口感如云朵般绵密',   price: 38, level: 3, img: '_images/page2_img1.jpeg' },
-  { id: 7,  name: '龙舌兰日出',   desc: '视觉如日出，色彩绚丽，甜中带酸，清爽怡人',                               price: 28, level: 3, img: '_images/page2_img2.jpeg' },
-  { id: 8,  name: '菠萝金',       desc: '植物香气与热带水果风味结合，酸甜清爽',                                   price: 28, level: 3, img: '_images/page2_img3.jpeg' },
-  { id: 9,  name: '威士忌酸',     desc: '世界最经典鸡尾酒之一，以威士忌的烈，碰撞柠檬的酸与甜浆的甜',             price: 28, level: 3, img: '_images/page2_img4.jpeg' },
-  { id: 10, name: '大吉利',       desc: '清醒的柠檬香气与朗姆酒完美平衡，酸甜爽口，简单纯粹',                     price: 28, level: 3, img: '_images/page2_img5.jpeg' },
-  { id: 11, name: '自由古巴',     desc: '朗姆与可乐气泡结合，经典不复杂，简单又迷人',                             price: 28, level: 5, img: '_images/page3_img1.jpeg' },
-  { id: 12, name: '玛格丽特',     desc: '酸甜清爽，盐霜激发龙舌兰风味，纪念调酒师逝去的恋人',                     price: 28, level: 5, img: '_images/page3_img2.jpeg' },
-  { id: 13, name: '僵尸',         desc: '多种朗姆酒叠加出热带层次，果香浓郁，酒感偏强',                           price: 38, level: 5, img: '_images/page3_img3.jpeg' },
-  { id: 14, name: '长岛冰茶',     desc: '夏天的快乐是长岛冰茶给的，入口清爽带点烈，喝完脸蛋红红超微醺',           price: 38, level: 5, img: '_images/page3_img4.jpeg' },
+  { id: 1,  name: '青野汐沫',   desc: '抹茶味、口感绵密',                                                         price: 38, level: 2, img: 'images/page1_img1.jpeg' },
+  { id: 2,  name: '椰林飘香',   desc: '浓郁顺滑、椰香四溢、热带风情、甜美迷人',                                 price: 38, level: 2, img: 'images/page1_img2.jpeg' },
+  { id: 3,  name: '莫吉托',     desc: '薄荷清凉、酸甜平衡、海明威最爱的古巴国民饮品',                           price: 38, level: 2, img: 'images/page1_img3.jpeg' },
+  { id: 4,  name: '少女百利甜', desc: '奶香、酒香、可可香完美融合，口感绵密，入口即化',                         price: 28, level: 2, img: 'images/page1_img4.jpeg' },
+  { id: 5,  name: '碳酸冰岛',   desc: '雪碧的清爽，蓝橙的柑橘香',                                               price: 28, level: 2, img: 'images/page1_img5.jpeg' },
+  { id: 6,  name: '拉莫斯金菲士', desc: '清新柑橘，奶香柔滑，带有橙花的淡雅芬芳，气泡轻盈，口感如云朵般绵密',   price: 38, level: 3, img: 'images/page2_img1.jpeg' },
+  { id: 7,  name: '龙舌兰日出',   desc: '视觉如日出，色彩绚丽，甜中带酸，清爽怡人',                               price: 28, level: 3, img: 'images/page2_img2.jpeg' },
+  { id: 8,  name: '菠萝金',       desc: '植物香气与热带水果风味结合，酸甜清爽',                                   price: 28, level: 3, img: 'images/page2_img3.jpeg' },
+  { id: 9,  name: '威士忌酸',     desc: '世界最经典鸡尾酒之一，以威士忌的烈，碰撞柠檬的酸与甜浆的甜',             price: 28, level: 3, img: 'images/page2_img4.jpeg' },
+  { id: 10, name: '大吉利',       desc: '清醒的柠檬香气与朗姆酒完美平衡，酸甜爽口，简单纯粹',                     price: 28, level: 3, img: 'images/page2_img5.jpeg' },
+  { id: 11, name: '自由古巴',     desc: '朗姆与可乐气泡结合，经典不复杂，简单又迷人',                             price: 28, level: 5, img: 'images/page3_img1.jpeg' },
+  { id: 12, name: '玛格丽特',     desc: '酸甜清爽，盐霜激发龙舌兰风味，纪念调酒师逝去的恋人',                     price: 28, level: 5, img: 'images/page3_img2.jpeg' },
+  { id: 13, name: '僵尸',         desc: '多种朗姆酒叠加出热带层次，果香浓郁，酒感偏强',                           price: 38, level: 5, img: 'images/page3_img3.jpeg' },
+  { id: 14, name: '长岛冰茶',     desc: '夏天的快乐是长岛冰茶给的，入口清爽带点烈，喝完脸蛋红红超微醺',           price: 38, level: 5, img: 'images/page3_img4.jpeg' },
 ];
 
 const levelLabels = {
