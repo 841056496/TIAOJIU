@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>特调鸡尾酒</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;700&family=Playfair+Display:ital@1&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #0a0a0a;
@@ -16,6 +17,7 @@
   --border: #b2a08655;
   --overlay-bg: rgba(0,0,0,0.85);
   --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
+  --font-art: 'Noto Serif SC', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -138,11 +140,11 @@ body {
   padding: 80px 20px 60px;
 }
 .hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(36px, 6vw, 56px);
+  font-family: var(--font-art);
+  font-size: clamp(42px, 6vw, 58px);
   color: var(--gold);
-  letter-spacing: 12px;
-  font-weight: 400;
+  letter-spacing: 10px;
+  font-weight: 200;
 }
 .hero-subtitle {
   font-size: 13px;
@@ -329,11 +331,11 @@ body {
   gap: 8px;
 }
 .card-name {
-  font-family: var(--font-serif);
-  font-size: 16px;
+  font-family: var(--font-art);
+  font-size: 17px;
   color: var(--gold);
-  font-weight: 400;
-  letter-spacing: 2px;
+  font-weight: 200;
+  letter-spacing: 3px;
 }
 .card-price {
   font-size: 15px;
@@ -426,7 +428,8 @@ body {
   padding: 16px 18px 18px;
 }
 .featured-card .card-name {
-  font-size: 17px;
+  font-size: 19px;
+  font-family: var(--font-art);
 }
 .featured-card .featured-tag {
   font-size: 10px;
@@ -523,10 +526,10 @@ body {
   flex-wrap: wrap;
 }
 .overlay-name {
-  font-family: var(--font-serif);
-  font-size: 30px;
+  font-family: var(--font-art);
+  font-size: 28px;
   color: var(--gold);
-  font-weight: 400;
+  font-weight: 200;
   letter-spacing: 4px;
 }
 .overlay-enname {
@@ -568,10 +571,11 @@ body {
 /* 品鉴笔记 */
 .overlay-desc {
   color: #bbbbbb;
-  font-family: var(--font-serif);
+  font-family: var(--font-art);
   font-size: 15px;
-  line-height: 2;
-  letter-spacing: 0.5px;
+  font-weight: 300;
+  line-height: 2.2;
+  letter-spacing: 1px;
   position: relative;
 }
 .overlay-desc::before {
@@ -641,10 +645,10 @@ body {
   .filter-tag { padding: 8px 16px; font-size: 12px; letter-spacing: 1px; }
   .card-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .card-info { padding: 12px 10px; }
-  .card-name { font-size: 14px; letter-spacing: 1px; }
+  .card-name { font-size: 16px; letter-spacing: 1px; }
   .card-price { font-size: 13px; }
   .overlay-body { padding: 22px 20px; }
-  .overlay-name { font-size: 24px; }
+  .overlay-name { font-size: 28px; }
   .overlay-desc { font-size: 14px; line-height: 1.9; }
   .overlay { padding: 12px; }
   .menu { padding: 12px 14px 60px; }
