@@ -8,12 +8,12 @@
 :root {
   --bg: #0a0a0a;
   --bg-card: #111110;
-  --gold: #c9a962;
-  --gold-dim: #8a7040;
-  --gold-glow: rgba(201,169,98,0.15);
+  --gold: #b2a086;
+  --gold-dim: #7a6b5a;
+  --gold-glow: rgba(178,160,134,0.15);
   --text: #cccccc;
   --text-dim: #777777;
-  --border: #c9a96233;
+  --border: #b2a08655;
   --overlay-bg: rgba(0,0,0,0.85);
   --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -29,6 +29,108 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
+/* 四角花纹 */
+.gold-corner {
+  position: fixed;
+  pointer-events: none; z-index: 0;
+}
+/* 外框 */
+.gold-corner::before {
+  content: '';
+  position: absolute;
+  border-color: rgba(255,255,255,0.08);
+  border-style: solid;
+}
+/* 内金纹 */
+.gold-corner::after {
+  content: '';
+  position: absolute;
+  border-color: var(--gold);
+  border-style: solid;
+  opacity: 0.55;
+}
+/* 左上 */
+.gold-corner.tl { top: 20px; left: 16px; width: 80px; height: 80px; }
+.gold-corner.tl::before { inset: 0; border-width: 1px 0 0 1px; }
+.gold-corner.tl::after  { inset: 6px; border-width: 1px 0 0 1px; }
+/* 右上 */
+.gold-corner.tr { top: 20px; right: 16px; width: 80px; height: 80px; }
+.gold-corner.tr::before { inset: 0; border-width: 1px 1px 0 0; }
+.gold-corner.tr::after  { inset: 6px; border-width: 1px 1px 0 0; }
+/* 左下 */
+.gold-corner.bl { bottom: 20px; left: 16px; width: 80px; height: 80px; }
+.gold-corner.bl::before { inset: 0; border-width: 0 0 1px 1px; }
+.gold-corner.bl::after  { inset: 6px; border-width: 0 0 1px 1px; }
+/* 右下 */
+.gold-corner.br { bottom: 20px; right: 16px; width: 80px; height: 80px; }
+.gold-corner.br::before { inset: 0; border-width: 0 1px 1px 0; }
+.gold-corner.br::after  { inset: 6px; border-width: 0 1px 1px 0; }
+
+/* 角花 - 小金菱 */
+.corner-orb {
+  position: fixed;
+  width: 4px; height: 4px;
+  background: var(--gold);
+  border-radius: 1px;
+  transform: rotate(45deg);
+  pointer-events: none; z-index: 0;
+  opacity: 0.5;
+}
+.corner-orb.tl-orb { top: 26px; left: 22px; }
+.corner-orb.tr-orb { top: 26px; right: 22px; }
+.corner-orb.bl-orb { bottom: 26px; left: 22px; }
+.corner-orb.br-orb { bottom: 26px; right: 22px; }
+
+/* 左右边线 - 直线+金纹+直线 */
+.gold-edge {
+  position: fixed;
+  top: 0; bottom: 0;
+  pointer-events: none; z-index: 0;
+}
+.gold-edge.left { left: 16px; }
+.gold-edge.right { right: 16px; }
+/* 上直线 */
+.gold-edge::before {
+  content: '';
+  position: absolute;
+  top: 12%;
+  height: 30%;
+  width: 1px;
+  background: rgba(255,255,255,0.06);
+}
+.gold-edge.left::before { left: 0; }
+.gold-edge.right::before { right: 0; }
+/* 中间金纹 */
+.gold-edge::after {
+  content: '';
+  position: absolute;
+  top: 42%;
+  height: 16%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold) 20%, var(--gold) 80%, transparent);
+  opacity: 0.4;
+}
+.gold-edge.left::after { left: 0; }
+.gold-edge.right::after { right: 0; }
+/* 下直线 - 用额外元素 */
+.edge-bottom {
+  position: fixed;
+  top: 58%; bottom: 0;
+  pointer-events: none; z-index: 0;
+  width: 1px;
+}
+.edge-bottom::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 45%;
+  width: 1px;
+  background: rgba(255,255,255,0.06);
+}
+.edge-bottom.left { left: 16px; }
+.edge-bottom.right { right: 16px; }
+.edge-bottom.left::before { left: 0; }
+.edge-bottom.right::before { right: 0; }
 
 /* === 封面区 === */
 .hero {
@@ -59,6 +161,38 @@ body {
   font-size: 14px;
   margin-top: 22px;
   letter-spacing: 2px;
+}
+
+/* === 鎏金细线 === */
+.sparse-line {
+  width: 80px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(178,160,134,0.5), transparent);
+}
+
+/* === 星闪鎏金 === */
+.star-dust {
+  pointer-events: none;
+  position: relative;
+  overflow: visible;
+}
+.star-dust span {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  display: block;
+  animation: starTwinkle var(--dur, 3s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+}
+@keyframes starTwinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  10% { opacity: 0.8; transform: scale(1.5); }
+  20% { opacity: 0.1; transform: scale(0.7); }
+  30% { opacity: 0.5; transform: scale(1.3); }
+  45% { opacity: 0.05; transform: scale(0.6); }
+  60% { opacity: 0; transform: scale(1); }
 }
 
 /* === 筛选栏 === */
@@ -98,7 +232,7 @@ body {
   color: var(--bg);
   border-color: var(--gold);
   font-weight: 600;
-  box-shadow: 0 0 24px rgba(201,169,98,0.25);
+  box-shadow: 0 0 24px rgba(178,160,134,0.25);
 }
 
 /* === 菜单主体 === */
@@ -128,15 +262,16 @@ body {
 }
 .section-stars {
   display: block;
-  font-size: 18px;
+  font-size: 26px;
   color: var(--gold);
-  letter-spacing: 6px;
-  margin-bottom: 8px;
+  letter-spacing: 8px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 16px rgba(178,160,134,0.7), 0 0 36px rgba(178,160,134,0.35), 0 0 60px rgba(178,160,134,0.15);
 }
 .section-label {
-  font-size: 11px;
-  color: var(--gold-dim);
-  letter-spacing: 6px;
+  font-size: 15px;
+  color: var(--gold);
+  letter-spacing: 8px;
   text-transform: uppercase;
 }
 
@@ -206,6 +341,102 @@ body {
   white-space: nowrap;
 }
 
+/* === 首席推荐 === */
+.featured-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 24px 0;
+  animation: fadeInUp 0.6s ease both;
+}
+.featured-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.featured-badge {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 6px 24px;
+  border-radius: 2px;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 6px;
+  margin-bottom: 10px;
+}
+.featured-sub {
+  display: block;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 5px;
+}
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.featured-card {
+  background: linear-gradient(160deg, #141410, #0f0f0e);
+  border: 1px solid rgba(178,160,134,0.45);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.featured-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 16px 48px rgba(178,160,134,0.18);
+}
+.featured-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.8;
+}
+.featured-ribbon {
+  position: absolute;
+  top: 12px;
+  right: -6px;
+  z-index: 2;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 3px 14px 3px 10px;
+  font-family: var(--font-serif);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+.featured-ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-top: 5px solid var(--gold-dim);
+}
+.featured-card .card-img-wrap {
+  aspect-ratio: 16/10;
+}
+.featured-card .card-info {
+  padding: 16px 18px 18px;
+}
+.featured-card .card-name {
+  font-size: 17px;
+}
+.featured-card .featured-tag {
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 3px;
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-sans);
+}
+
 /* === 浮层 === */
 .overlay {
   position: fixed;
@@ -237,7 +468,7 @@ body {
   position: relative;
   transform: scale(0.88) translateY(24px);
   transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1);
-  box-shadow: 0 0 80px rgba(201,169,98,0.08), 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 0 80px rgba(178,160,134,0.08), 0 20px 60px rgba(0,0,0,0.5);
 }
 .overlay.active .overlay-card {
   transform: scale(1) translateY(0);
@@ -305,10 +536,11 @@ body {
   font-style: italic;
 }
 .overlay-stars {
-  font-size: 16px;
+  font-size: 17px;
   letter-spacing: 4px;
   margin-bottom: 6px;
   color: var(--gold);
+  text-shadow: 0 0 10px rgba(178,160,134,0.5), 0 0 20px rgba(178,160,134,0.25);
 }
 .overlay-divider {
   display: flex;
@@ -416,12 +648,50 @@ body {
   .overlay-desc { font-size: 14px; line-height: 1.9; }
   .overlay { padding: 12px; }
   .menu { padding: 12px 14px 60px; }
+  .section-stars { font-size: 16px; }
+  .section-label { font-size: 13px; letter-spacing: 4px; }
   .section-header { margin-bottom: 22px; }
   .menu-section { margin-bottom: 44px; }
+  .featured-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .featured-header { margin-bottom: 20px; }
+  .gold-corner.tl { top: 10px; left: 6px; width: 50px; height: 50px; }
+  .gold-corner.tr { top: 10px; right: 6px; width: 50px; height: 50px; }
+  .gold-corner.bl { bottom: 10px; left: 6px; width: 50px; height: 50px; }
+  .gold-corner.br { bottom: 10px; right: 6px; width: 50px; height: 50px; }
+  .corner-orb { width: 3px; height: 3px; }
+  .corner-orb.tl-orb { top: 16px; left: 12px; }
+  .corner-orb.tr-orb { top: 16px; right: 12px; }
+  .corner-orb.bl-orb { bottom: 16px; left: 12px; }
+  .corner-orb.br-orb { bottom: 16px; right: 12px; }
+  .gold-edge.left { left: 6px; }
+  .gold-edge.right { right: 6px; }
+  .edge-bottom.left { left: 6px; }
+  .edge-bottom.right { right: 6px; }
+  .section-stars { font-size: 22px; letter-spacing: 6px; }
 }
 </style>
 </head>
 <body>
+
+<!-- 金线装饰 -->
+<div class="gold-edge left" aria-hidden="true"></div>
+<div class="gold-edge right" aria-hidden="true"></div>
+
+<!-- 四角花纹 -->
+<div class="gold-corner tl" aria-hidden="true"></div>
+<div class="gold-corner tr" aria-hidden="true"></div>
+<div class="gold-corner bl" aria-hidden="true"></div>
+<div class="gold-corner br" aria-hidden="true"></div>
+
+<!-- 角花金菱 -->
+<div class="corner-orb tl-orb" aria-hidden="true"></div>
+<div class="corner-orb tr-orb" aria-hidden="true"></div>
+<div class="corner-orb bl-orb" aria-hidden="true"></div>
+<div class="corner-orb br-orb" aria-hidden="true"></div>
+
+<!-- 下直线 -->
+<div class="edge-bottom left" aria-hidden="true"></div>
+<div class="edge-bottom right" aria-hidden="true"></div>
 
 <!-- 封面 -->
 <header class="hero">
@@ -432,13 +702,40 @@ body {
   <p class="hero-desc">百分百特调 · 每一杯都是匠心之作</p>
 </header>
 
+<!-- 金边分隔 -->
+<div class="sparse-line"></div>
+
+<!-- 星闪 -->
+<div class="star-dust" style="height:40px;" aria-hidden="true">
+  <span style="width:2px;height:2px;top:30%;left:20%;--dur:3s;--delay:0s"></span>
+  <span style="width:3px;height:3px;top:50%;left:55%;--dur:3.5s;--delay:1.3s"></span>
+  <span style="width:2px;height:2px;top:20%;left:75%;--dur:2.8s;--delay:2.5s"></span>
+  <span style="width:3px;height:3px;top:60%;left:88%;--dur:3.2s;--delay:0.7s"></span>
+</div>
+
 <!-- 筛选栏 -->
 <nav class="filter-bar">
   <button class="filter-tag active" data-filter="all">全部</button>
-  <button class="filter-tag" data-filter="2">⭐⭐</button>
-  <button class="filter-tag" data-filter="3">⭐⭐⭐</button>
-  <button class="filter-tag" data-filter="5">⭐⭐⭐⭐⭐</button>
+  <button class="filter-tag" data-filter="2">★★</button>
+  <button class="filter-tag" data-filter="3">★★★</button>
+  <button class="filter-tag" data-filter="5">★★★★★</button>
 </nav>
+
+<!-- 首席推荐 -->
+<section class="featured-section" id="featuredSection"></section>
+
+<div class="star-dust" style="height:50px;" aria-hidden="true">
+  <span style="width:3px;height:3px;top:20%;left:15%;--dur:2.5s;--delay:0s"></span>
+  <span style="width:2px;height:2px;top:50%;left:35%;--dur:3.5s;--delay:0.8s"></span>
+  <span style="width:4px;height:4px;top:30%;left:55%;--dur:3s;--delay:1.5s"></span>
+  <span style="width:2px;height:2px;top:60%;left:72%;--dur:2.8s;--delay:2.2s"></span>
+  <span style="width:3px;height:3px;top:15%;left:85%;--dur:3.2s;--delay:0.4s"></span>
+  <span style="width:2px;height:2px;top:70%;left:8%;--dur:4s;--delay:3s"></span>
+  <span style="width:3px;height:3px;top:40%;left:92%;--dur:2.6s;--delay:1.8s"></span>
+</div>
+
+<!-- 金边分隔 -->
+<div class="sparse-line"></div>
 
 <!-- 菜单 -->
 <main class="menu" id="menuContainer"></main>
@@ -468,6 +765,20 @@ body {
   </div>
 </div>
 
+<!-- 星闪鎏金 -->
+<div class="star-dust" style="height:50px;" aria-hidden="true">
+  <span style="width:3px;height:3px;top:25%;left:10%;--dur:3.3s;--delay:0s"></span>
+  <span style="width:2px;height:2px;top:55%;left:28%;--dur:2.7s;--delay:1.2s"></span>
+  <span style="width:4px;height:4px;top:35%;left:48%;--dur:3.8s;--delay:0.6s"></span>
+  <span style="width:2px;height:2px;top:15%;left:65%;--dur:2.4s;--delay:2s"></span>
+  <span style="width:3px;height:3px;top:60%;left:80%;--dur:3.1s;--delay:1.5s"></span>
+  <span style="width:2px;height:2px;top:45%;left:90%;--dur:3.6s;--delay:0.3s"></span>
+  <span style="width:3px;height:3px;top:10%;left:40%;--dur:2.9s;--delay:2.8s"></span>
+</div>
+
+<!-- 金边分隔 -->
+<div class="sparse-line"></div>
+
 <!-- 页脚 -->
 <footer class="footer">
   <div class="footer-line"></div>
@@ -484,20 +795,20 @@ const drinks = [
   { id: 5,  name: '碳酸冰岛',     enName: 'Iceland Veil',         desc: '冰川裂开第一道蓝光。蓝橙利口酒染出冰湖般的透亮碧蓝，气泡水炸开细密清冽的碳酸星群。入口是冷冽的柑橘调海风，舌尖微麻，像咬碎了一小块极地浮冰。余韵干净利落，只留一丝清甜挂在杯壁。',                                                                     price: 28, level: 2, img: 'images/page1_img5.jpeg' },
   { id: 6,  name: '拉莫斯金菲士', enName: 'Ramos Gin Fizz',       desc: '绵密如云，粉柔入喉。金酒的杜松子清香与淡奶油、牛奶打成蓬松雪顶，红石榴糖浆晕开一抹淡粉底色，气泡水在杯底轻盈涌动。入口如云朵裹着柑橘香，绵滑过后是清冽收尾，层次分明。',                                                                       price: 38, level: 2, img: 'images/page2_img1.jpeg' },
   { id: 7,  name: '龙舌兰日出',   enName: 'Tequila Sunrise',      desc: '晨光渐次晕染，一杯即破晓。龙舌兰的草本辛香托起鲜橙汁的明媚酸甜，红石榴糖浆缓缓沉底又攀升，在杯中染出黎明时分的霞色渐变。入口清新明亮，余韵微甜不腻。',                                                                           price: 28, level: 2, img: 'images/page2_img2.jpeg' },
-  { id: 8,  name: '菠萝金',       enName: 'Pineapple Gin',        desc: '金酒作底，菠萝镀金。金酒的杜松子清香托起菠萝汁的热带甜润，柠檬汁划开一道明亮的酸度，三者在杯中达成清爽平衡。入口如海风裹着果香，酸甜利落，余韵干净。',                                                                         price: 28, level: 3, img: 'images/page2_img3.jpeg' },
+  { id: 8,  name: '菠萝金',       enName: 'Pineapple Gin',        desc: '金酒作底，菠萝镀金。金酒的杜松子清香托起菠萝汁的热带甜润，柠檬汁划开一道明亮的酸度，三者在杯中达成清爽平衡。入口如海风裹着果香，酸甜利落，余韵干净。',                                                                         price: 28, level: 2, img: 'images/page2_img3.jpeg' },
   { id: 9,  name: '威士忌酸',     enName: 'Whiskey Sour',         desc: '琥珀微澜，酸冽藏温。威士忌的木质醇香与鲜柠檬汁的明亮酸意对撞，蛋清打出绵密如绸的泡沫，在杯中覆一层柔光。入口酸爽先至，随即是威士忌的温热回甘，余韵干净利落。',                                                                       price: 28, level: 3, img: 'images/page2_img4.jpeg' },
   { id: 10, name: '大吉利',       enName: 'Daiquiri',             desc: '酸甜清冽，朗姆本色。白朗姆的微甘托起柠檬汁的鲜活酸意，糖浆一勺勾出圆润弧线。入口干净爽利，像海风掠过舌尖，余味是极简的清凉。',                                                                                 price: 28, level: 3, img: 'images/page2_img5.jpeg' },
   { id: 11, name: '自由古巴',     enName: 'Cuba Libre',           desc: '焦糖色的浪涌，裹着朗姆的温热呼吸。可乐的气泡托起白朗姆的醇烈，甜与苦在杯中角力又和解。入口是冰凉的焦糖暗涌，落喉后一缕暖意缓缓升起，像自由散漫的黄昏。',                                                                       price: 28, level: 3, img: 'images/page3_img1.jpeg' },
   { id: 12, name: '玛格丽特',     enName: 'Margarita',            desc: '盐边如霜，酸冽生香。龙舌兰的草本烈性被君度的橙香柔化，鲜柠檬汁劈开一道明亮的酸，盐边在杯口凝成薄霜，入口先咸后酸，随即温热回甘，余韵干净得只剩一片旷野。',                                                                     price: 28, level: 3, img: 'images/page3_img2.jpeg' },
-  { id: 13, name: '日不落',       enName: 'Sunset Veil',          desc: '橙香作序，渐变收尾。伏特加的纯净烈性托起橙汁的明媚甜润，蓝橙利口酒染出一片晴空底色，红石榴糖浆缓缓沉落，在杯中晕开从蓝到粉的落日渐变。入口是明亮果酸，余韵清甜温暖，像一场永不落幕的黄昏。',                                                       price: 88, level: 3, img: 'images/drink_13.jpg' },
+  { id: 13, name: '日不落',       enName: 'Sunset Veil',          desc: '橙香作序，渐变收尾。伏特加的纯净烈性托起橙汁的明媚甜润，蓝橙利口酒染出一片晴空底色，红石榴糖浆缓缓沉落，在杯中晕开从蓝到粉的落日渐变。入口是明亮果酸，余韵清甜温暖，像一场永不落幕的黄昏。',                                                       price: 88, level: 3, img: 'images/日不落.jpg' },
   { id: 14, name: '僵尸',         enName: 'Zombie',               desc: '三色朗姆沉底，百香果引路。白朗姆的清冽、金朗姆的温润、黑朗姆的焦糖暗香，在菠萝汁的甜润与百香果的酸香中层层堆叠。入口是热带水果的明媚冲锋，落喉后三种朗姆的热烈才缓缓炸开，浓烈而醉人。',                                                         price: 38, level: 5, img: 'images/page3_img3.jpeg' },
   { id: 15, name: '长岛冰茶',     enName: 'Long Island Iced Tea', desc: '看似茶色，实为烈性暗涌。五种烈酒在杯中短暂交锋，龙舌兰的草本、伏特加的冷冽、朗姆的微甜、金酒的杜松香与君度的橙甜，被可乐的焦糖暗色温柔镇压。入口是冰茶的错觉，落喉后温热层层攀升，像一场不动声色的暴风雨。',                                           price: 38, level: 5, img: 'images/page3_img4.jpeg' },
 ];
 
 const levelLabels = {
-  2: { stars: '⭐⭐',     name: '微醺' },
-  3: { stars: '⭐⭐⭐',   name: '半醺' },
-  5: { stars: '⭐⭐⭐⭐⭐', name: '深醺' },
+  2: { stars: '★★',     name: '微醺' },
+  3: { stars: '★★★',   name: '半醺' },
+  5: { stars: '★★★★★', name: '深醺' },
 };
 
 // === 渲染 ===
@@ -575,7 +886,42 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeDetail();
 });
 
+// === 首席推荐 ===
+const featuredIds = [1, 3, 2]; // 云抹、莫吉托、椰林飘香
+
+function renderFeatured() {
+  const container = document.getElementById('featuredSection');
+  const items = featuredIds.map(id => drinks.find(d => d.id === id)).filter(Boolean);
+  if (!items.length) return;
+
+  let html = `<div class="featured-header">
+    <span class="featured-badge">首席推荐</span>
+    <span class="featured-sub">CHEF'S SELECTION</span>
+  </div>
+  <div class="featured-grid">`;
+  for (const drink of items) {
+    html += `
+      <div class="featured-card" onclick="openDetail(${drink.id})">
+        <div class="featured-ribbon">推荐</div>
+        <div class="card-img-wrap">
+          <img src="${drink.img}" alt="${drink.name}" class="card-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-img-fallback" style="display:none">🍸</div>
+        </div>
+        <div class="card-info">
+          <div>
+            <span class="featured-tag">CHEF'S PICK</span>
+            <h3 class="card-name">${drink.name}</h3>
+          </div>
+          <span class="card-price">¥${drink.price}</span>
+        </div>
+      </div>`;
+  }
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
 // === 初始渲染 ===
+renderFeatured();
 renderMenu('all');
 </script>
 
