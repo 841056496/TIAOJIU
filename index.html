@@ -7,6 +7,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;700&family=Playfair+Display:ital@1&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
 <style>
 @font-face {
+  font-family: 'PMingLiU-TW';
+  src: url('R-PMingLiU-TW-2.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
   font-family: 'Aozora Mincho';
   src: url('AozoraMinchoRegular-2.ttf') format('truetype');
   font-weight: 400;
@@ -24,7 +31,8 @@
   --border: #b2a08655;
   --overlay-bg: rgba(0,0,0,0.85);
   --font-serif: 'Noto Serif SC', 'STSong', 'SimSun', 'Songti SC', serif;
-  --font-art: 'Aozora Mincho', 'Noto Serif SC', serif;
+  --font-art: 'PMingLiU-TW', 'Noto Serif SC', serif;
+  --font-desc: 'Aozora Mincho', 'Noto Serif SC', serif;
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -578,9 +586,9 @@ body {
 /* 品鉴笔记 */
 .overlay-desc {
   color: #bbbbbb;
-  font-family: var(--font-art);
+  font-family: var(--font-desc);
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 2.2;
   letter-spacing: 1px;
   position: relative;
@@ -628,6 +636,147 @@ body {
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
   opacity: 0.4;
 }
+
+/* === 活动限定 === */
+.event-section {
+  max-width: 1200px;
+  margin: 0 auto 64px;
+  padding: 0 24px;
+  animation: fadeInUp 0.6s ease 0.15s both;
+}
+.event-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.event-badge {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  padding: 6px 24px;
+  border-radius: 2px;
+  color: var(--gold);
+  font-family: var(--font-art);
+  font-size: 13px;
+  letter-spacing: 6px;
+}
+.event-sub {
+  display: block;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 5px;
+  margin-top: 6px;
+}
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.event-card {
+  background: linear-gradient(160deg, #12110e, #0d0d0a);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s, border-color 0.4s;
+}
+.event-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 12px 40px var(--gold-glow);
+}
+.event-ribbon {
+  position: absolute;
+  top: 12px;
+  right: -6px;
+  z-index: 2;
+  background: var(--gold);
+  color: #0a0a0a;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 3px 14px 3px 10px;
+  font-family: var(--font-art);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.event-ribbon::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  right: 0;
+  border-left: 6px solid transparent;
+  border-top: 5px solid var(--gold-dim);
+}
+.event-card .card-img-wrap {
+  aspect-ratio: 3/4;
+}
+.event-card .card-info {
+  padding: 18px 18px 20px;
+}
+.event-card .card-name {
+  font-family: var(--font-art);
+  font-size: 18px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.event-card .event-desc {
+  font-size: 11px;
+  color: #888;
+  margin-top: 6px;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.event-card .card-price {
+  font-size: 15px;
+  color: var(--gold-dim);
+}
+
+@media (max-width: 640px) {
+  .event-section { padding: 0 14px; margin-bottom: 44px; }
+  .event-grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+  .event-card .card-name { font-size: 16px; }
+}
+
+/* === 神秘转盘 === */
+.wheel-box{display:flex;flex-direction:column;align-items:center;padding:0 24px 40px;max-width:1200px;margin:0 auto}
+.wheel-stage{position:relative;width:320px;height:320px;cursor:pointer;transition:transform 0.1s}
+.wheel-stage:active{transform:scale(0.97)}
+.wheel-wrap{position:relative;width:280px;height:280px;top:20px;left:20px}
+.wheel-wrap::before{content:'';position:absolute;inset:-16px;border-radius:50%;border:2px solid transparent;box-shadow:0 0 30px var(--gold-glow),0 0 60px rgba(178,160,134,0.1);animation:ringPulse 2s ease-in-out infinite;pointer-events:none}
+.wheel-wrap.spinning::before{animation:ringSpin 0.3s linear infinite;box-shadow:0 0 50px rgba(178,160,134,0.4),0 0 100px rgba(178,160,134,0.15)}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 20px rgba(178,160,134,0.15)}50%{box-shadow:0 0 40px rgba(178,160,134,0.3)}}
+@keyframes ringSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.wheel-canvas{width:100%;height:100%;border-radius:50%}
+.wheel-pointer{position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:28px solid var(--gold);filter:drop-shadow(0 0 8px rgba(178,160,134,0.6));z-index:2}
+.wheel-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:var(--bg);border:2px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 0 20px var(--gold-glow),inset 0 0 20px rgba(178,160,134,0.05);animation:centerGlow 2s ease-in-out infinite}
+.wheel-center span{font-size:18px;color:var(--gold)}
+@keyframes centerGlow{0%,100%{box-shadow:0 0 10px var(--gold-glow)}50%{box-shadow:0 0 30px rgba(178,160,134,0.5)}}
+.wheel-rays{position:absolute;inset:-30px;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:1}
+.wheel-rays.active{opacity:0.5;animation:raySpin 8s linear infinite}
+@keyframes raySpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.orbit-dots{position:absolute;inset:-8px;pointer-events:none;z-index:0;animation:orbitRotate 20s linear infinite;opacity:0.25}
+@keyframes orbitRotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.orbit-dot{position:absolute;width:2px;height:2px;border-radius:50%;background:var(--gold)}
+.spin-hint{color:rgba(178,160,134,0.5);font-size:11px;letter-spacing:4px;margin-top:10px;animation:hintFade 3s ease-in-out infinite}
+@keyframes hintFade{0%,100%{opacity:0.3}50%{opacity:0.8}}
+.spark-canvas{position:absolute;inset:-30px;width:380px;height:380px;pointer-events:none;z-index:4}
+.star-canvas{position:absolute;inset:-30px;width:380px;height:380px;pointer-events:none;z-index:0;opacity:0.4}
+.wheel-price-tag{color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:16px;border:1px solid rgba(178,160,134,0.3);padding:6px 20px;border-radius:20px}
+/* 结果卡 */
+.game-result{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center}
+.game-result.show{display:flex}
+.game-result-card{background:linear-gradient(160deg,#12110e,#0a0a0a);border:2px solid rgba(178,160,134,0.3);border-radius:12px;padding:24px;text-align:center;max-width:380px;width:90vw;position:relative;animation:resultIn 0.6s cubic-bezier(0.34,1.56,0.64,1)}
+.game-result-card::after{content:'';position:absolute;inset:-3px;border-radius:14px;border:1px solid transparent;animation:glowRing 2s ease-in-out infinite;pointer-events:none}
+@keyframes resultIn{from{transform:scale(0.6) translateY(30px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+@keyframes glowRing{0%,100%{border-color:rgba(178,160,134,0.1)}50%{border-color:rgba(178,160,134,0.4)}}
+.game-result-card h3{font-size:26px;color:var(--gold);letter-spacing:4px;margin-bottom:4px;font-family:var(--font-art)}
+.game-result-card .en{font-size:12px;color:var(--gold-dim);letter-spacing:2px;margin-bottom:14px}
+.game-result-card .desc{font-size:13px;color:#aaa;line-height:1.8;margin-bottom:20px}
+.game-result-card button{padding:10px 36px;background:var(--gold);color:var(--bg);border:none;border-radius:4px;cursor:pointer;font-size:14px;letter-spacing:3px}
+.game-result-card button:hover{box-shadow:0 0 30px rgba(178,160,134,0.3)}
+
+@media(max-width:640px){.wheel-stage{width:260px;height:260px}.wheel-wrap{width:220px;height:220px}.spark-canvas,.star-canvas{width:320px;height:320px}}
 
 /* === 页脚 === */
 .footer {
@@ -683,6 +832,9 @@ body {
 </style>
 </head>
 <body>
+
+<!-- 全页星场 -->
+<canvas id="bgStars" style="position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:0;opacity:0.3"></canvas>
 
 <!-- 金线装饰 -->
 <div class="gold-edge left" aria-hidden="true"></div>
@@ -748,6 +900,30 @@ body {
 <!-- 金边分隔 -->
 <div class="sparse-line"></div>
 
+<!-- 神秘转盘 -->
+<div class="wheel-box" id="wheelBox">
+  <div class="wheel-title" style="color:var(--gold);font-family:var(--font-art);font-size:20px;letter-spacing:4px;text-align:center">百分百KTV · 神秘酒窖限时开启</div>
+  <div class="wheel-stage" id="wheelStage" onclick="spinWheel()" style="margin-top:20px">
+    <canvas class="star-canvas" id="starCanvas" width="760" height="760"></canvas>
+    <canvas class="wheel-rays" id="raysCanvas" width="640" height="640"></canvas>
+    <div class="orbit-dots" id="orbitDots"></div>
+    <div class="wheel-wrap" id="wheelWrap">
+      <canvas class="wheel-canvas" id="wheelCanvas" width="600" height="600"></canvas>
+      <div class="wheel-pointer"></div>
+      <div class="wheel-center"><span>✦</span></div>
+    </div>
+    <canvas class="spark-canvas" id="sparkCanvas" width="760" height="760"></canvas>
+  </div>
+  <p class="spin-hint" id="spinHint">轻触金轮 · 揭晓神秘特调</p>
+  <p style="display:inline-block;margin:6px auto 0;color:var(--gold);font-size:12px;letter-spacing:2px;border:1px solid rgba(178,160,134,0.4);padding:4px 18px;border-radius:20px">¥19.9 揭晓神秘特调</p>
+</div>
+
+<!-- 金边分隔 -->
+<div class="sparse-line"></div>
+
+<!-- 活动限定 -->
+<section class="event-section" id="eventSection"></section>
+
 <!-- 菜单 -->
 <main class="menu" id="menuContainer"></main>
 
@@ -790,6 +966,17 @@ body {
 <!-- 金边分隔 -->
 <div class="sparse-line"></div>
 
+<!-- 转盘结果弹窗 -->
+<div class="game-result" id="gameResult" onclick="if(event.target===this)closeGameResult()">
+  <div class="game-result-card">
+    <div style="display:inline-block;margin-bottom:12px;background:var(--gold);color:var(--bg);padding:3px 12px;border-radius:2px;letter-spacing:2px;font-size:10px">🎉 恭喜获得</div>
+    <h3 id="gameResultName"></h3>
+    <div class="en" id="gameResultEn"></div>
+    <p class="desc" id="gameResultDesc"></p>
+    <button onclick="closeGameResult()">收下这杯</button>
+  </div>
+</div>
+
 <!-- 页脚 -->
 <footer class="footer">
   <div class="footer-line"></div>
@@ -821,6 +1008,56 @@ const levelLabels = {
   3: { stars: '★★★',   name: '半醺' },
   5: { stars: '★★★★★', name: '深醺' },
 };
+
+// === 活动酒款 ===
+const eventDrinks = [
+  { id: 'e1', name: '约定',     enName: 'Promise Fizz',    desc: '果香与气泡的浪漫盟约。伏特加的纯净托起莓桃汁的酸甜馥郁，白朗姆添一缕温润底韵，气泡水炸开细密清冽的珠帘。入口是莓果的明媚与桃子的软甜在舌尖轻舞，气泡裹着微醺缓缓升腾，余味清新如初恋的诺言。',                                                       price: 0, img: 'images/约定.jpg' },
+  { id: 'e2', name: '小狗',     enName: 'Mellow Pup',      desc: '蜜瓜甜，椰子香，像小狗摇尾的午后。蜜多利的蜜瓜清甜与马利宝的椰子奶香融成暖融融的果味基底，菠萝汁注入明媚酸度，柠檬汁划开一道明亮收尾。入口是软糯的甜润，果香层层化开，余韵干净得像被轻轻蹭了一下手心。',                                       price: 0, img: 'images/小狗.jpg' },
+  { id: 'e3', name: '螺丝起子', enName: 'Screwdriver',     desc: '橙香为鞘，烈性藏锋。伏特加的凛冽被鲜橙汁的明媚果酸温柔包裹，甜与烈在杯中短暂角力后达成默契。入口是果汁般的轻松，落喉后温热悄然攀上，像一场不动声色的微醺。',                                                                         price: 0, img: 'images/螺丝起子.jpg' },
+];
+
+function renderEvent() {
+  const container = document.getElementById('eventSection');
+  let html = `<div class="event-header">
+    <span class="event-badge">活动限定</span>
+    <span class="event-sub">LIMITED EDITION</span>
+  </div>
+  <div class="event-grid">`;
+  for (const drink of eventDrinks) {
+    html += `
+      <div class="event-card" onclick="openEventDetail('${drink.id}')">
+        <div class="event-ribbon">限定</div>
+        <div class="card-img-wrap">
+          <img src="${drink.img}" alt="${drink.name}" class="card-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="card-img-fallback" style="display:none">🍸</div>
+        </div>
+        <div class="card-info">
+          <div>
+            <h3 class="card-name">${drink.name} · ${drink.enName}</h3>
+          </div>
+        </div>
+      </div>`;
+  }
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+function openEventDetail(id) {
+  const drink = eventDrinks.find(d => d.id === id);
+  if (!drink) return;
+  const img = document.getElementById('overlayImg');
+  img.src = drink.img;
+  img.style.display = '';
+  document.getElementById('overlayFallback').style.display = 'none';
+  document.getElementById('overlayName').textContent = drink.name;
+  document.getElementById('overlayEnName').textContent = '· ' + drink.enName;
+  document.getElementById('overlayStars').textContent = '活动限定';
+  document.getElementById('overlayDesc').textContent = drink.desc;
+  document.getElementById('overlayPrice').textContent = '';
+  document.getElementById('overlayLevelTag').textContent = 'LIMITED';
+  document.getElementById('overlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
 
 // === 渲染 ===
 function renderMenu(filterLevel) {
@@ -931,9 +1168,133 @@ function renderFeatured() {
   container.innerHTML = html;
 }
 
+// === 神秘转盘 ===
+(function(){
+const wCanvas=document.getElementById('wheelCanvas'),wCtx=wCanvas.getContext('2d');
+const rCanvas=document.getElementById('raysCanvas'),rCtx=rCanvas.getContext('2d');
+const sCanvas=document.getElementById('starCanvas'),sCtx=sCanvas.getContext('2d');
+const pCanvas=document.getElementById('sparkCanvas'),pCtx=pCanvas.getContext('2d');
+const colors=['#b2a086','#a0947e','#c2ab8a'];
+const wDrinks=eventDrinks;
+
+// 星场
+let stars=[];
+for(let i=0;i<100;i++)stars.push({x:Math.random()*760,y:Math.random()*760,r:Math.random()*1.2+0.3,p:Math.random()*Math.PI*2,s:0.008+Math.random()*0.02});
+function drawStars(){
+  sCtx.clearRect(0,0,760,760);
+  for(const s of stars){s.p+=s.s;const a=0.1+Math.sin(s.p)*0.15;if(a>0){sCtx.beginPath();sCtx.arc(s.x,s.y,s.r,0,Math.PI*2);sCtx.fillStyle='rgba(178,160,134,'+a+')';sCtx.fill();}}
+}
+
+// 涟漪
+let ripples=[];
+function emitRipple(cx,cy){ripples.push({x:cx,y:cy,r:0,o:0.6});}
+function drawRipples(){
+  pCtx.clearRect(0,0,760,760);
+  for(let i=ripples.length-1;i>=0;i--){const r=ripples[i];r.r+=3;r.o-=0.015;if(r.o<=0){ripples.splice(i,1);continue;}pCtx.beginPath();pCtx.arc(r.x,r.y,r.r,0,Math.PI*2);pCtx.strokeStyle='rgba(178,160,134,'+r.o+')';pCtx.lineWidth=1.5;pCtx.stroke();}
+}
+
+// 光柱
+function drawRays(){
+  const R=320;rCtx.clearRect(0,0,640,640);rCtx.save();rCtx.translate(R,R);
+  for(let i=0;i<36;i++){const a=(i/36)*Math.PI*2;const l=90+Math.sin(Date.now()/600+i*0.7)*40;
+    rCtx.beginPath();rCtx.moveTo(Math.cos(a)*40,Math.sin(a)*40);rCtx.lineTo(Math.cos(a)*l,Math.sin(a)*l);
+    rCtx.strokeStyle='rgba(178,160,134,'+(0.05+Math.sin(Date.now()/500+i)*0.04)+')';rCtx.lineWidth=0.5;rCtx.stroke();}
+  rCtx.restore();
+}
+
+// 轨道点
+(function(){
+  let h='';const cX=380,cY=380;
+  for(let i=0;i<24;i++){const a=(i/24)*Math.PI*2,d=130+Math.random()*8;h+='<div class="orbit-dot" style="left:'+(cX+Math.cos(a)*d)+'px;top:'+(cY+Math.sin(a)*d)+'px;opacity:'+(0.2+Math.random()*0.4)+'"></div>';}
+  document.getElementById('orbitDots').innerHTML=h;
+})();
+
+// 画轮盘
+let wheelAngle=0;
+function drawWheel(angle){
+  const R=300,sa=Math.PI*2/3;
+  wCtx.clearRect(0,0,600,600);wCtx.save();wCtx.translate(R,R);wCtx.rotate(angle);
+  for(let i=0;i<3;i++){
+    const s=i*sa,e=s+sa,grd=wCtx.createRadialGradient(0,0,40,0,0,R);
+    grd.addColorStop(0,colors[i]);grd.addColorStop(0.7,colors[i]+'cc');grd.addColorStop(1,colors[i]+'88');
+    wCtx.beginPath();wCtx.moveTo(0,0);wCtx.arc(0,0,R-4,s,e);wCtx.closePath();wCtx.fillStyle=grd;wCtx.fill();
+    wCtx.strokeStyle='#1a1a10';wCtx.lineWidth=3;wCtx.stroke();
+    const m=s+sa/2,tx=Math.cos(m)*(R*0.52),ty=Math.sin(m)*(R*0.52);
+    wCtx.save();wCtx.translate(tx,ty);wCtx.rotate(m+Math.PI/2);
+    wCtx.shadowColor='rgba(0,0,0,0.5)';wCtx.shadowBlur=3;wCtx.fillStyle='#0a0a0a';wCtx.font='bold 18px serif';wCtx.textAlign='center';wCtx.fillText(wDrinks[i].name,0,0);wCtx.restore();
+  }
+  wCtx.beginPath();wCtx.arc(0,0,R-4,0,Math.PI*2);wCtx.strokeStyle='#b2a086';wCtx.lineWidth=5;wCtx.stroke();
+  for(let a=0;a<Math.PI*2;a+=Math.PI/30){const o=R-6,i2=R-16;wCtx.beginPath();wCtx.moveTo(Math.cos(a)*o,Math.sin(a)*o);wCtx.lineTo(Math.cos(a)*i2,Math.sin(a)*i2);wCtx.strokeStyle=a%(Math.PI*2/3)<0.01?'#b2a086':'rgba(178,160,134,0.3)';wCtx.lineWidth=a%(Math.PI*2/3)<0.01?3:1;wCtx.stroke();}
+  wCtx.restore();
+}
+
+let spinning=false;
+function spinWheel(){
+  if(spinning)return;spinning=true;
+  const wrap=document.getElementById('wheelWrap'),rays=document.getElementById('raysCanvas');
+  const hint=document.getElementById('spinHint'),stage=document.getElementById('wheelStage');
+  wrap.classList.add('spinning');rays.classList.add('active');
+  hint.textContent='金轮为你挑选今晚的惊喜...';stage.style.cursor='default';
+  const st=stage.getBoundingClientRect();
+  emitRipple(st.left+st.width/2-20,st.top+20);
+  let af;
+  function loop(){drawRays();drawStars();drawRipples();af=requestAnimationFrame(loop);}
+  loop();
+  const total=Math.random()*Math.PI*4+Math.PI*14,dur=5000+Math.random()*3000;
+  const sA=wheelAngle,t0=performance.now();
+  function anim(now){
+    const el=now-t0,p=Math.min(el/dur,1),eased=1-Math.pow(1-p,3);
+    wheelAngle=sA+total*eased;drawWheel(wheelAngle);
+    if(p<1)requestAnimationFrame(anim);
+    else{
+      spinning=false;cancelAnimationFrame(af);
+      wrap.classList.remove('spinning');rays.classList.remove('active');
+      hint.textContent='轻触金轮 · 揭晓神秘特调';stage.style.cursor='pointer';
+      const na=((wheelAngle%(Math.PI*2))+Math.PI*2)%(Math.PI*2);
+      const sa2=Math.PI*2/3,pa=-Math.PI/2;
+      const ra=((pa-na)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);
+      const idx=Math.floor(ra/sa2)%3;
+      const st2=stage.getBoundingClientRect(),cx2=st2.left+st2.width/2-20,cy2=st2.top+20;
+      emitRipple(cx2,cy2);setTimeout(()=>emitRipple(cx2,cy2),300);setTimeout(()=>emitRipple(cx2,cy2),600);
+      setTimeout(()=>showGameResult(wDrinks[idx]),800);
+    }
+  }
+  requestAnimationFrame(anim);
+}
+
+function showGameResult(drink){
+  document.getElementById('gameResultName').textContent=drink.name;
+  document.getElementById('gameResultEn').textContent='· '+drink.enName;
+  document.getElementById('gameResultDesc').textContent=drink.desc;
+  document.getElementById('gameResult').classList.add('show');
+}
+function closeGameResult(){document.getElementById('gameResult').classList.remove('show');}
+
+drawWheel();drawRays();drawStars();
+function bgLoop(){drawStars();drawRipples();requestAnimationFrame(bgLoop);}
+bgLoop();
+window.spinWheel=spinWheel;window.closeGameResult=closeGameResult;window.showGameResult=showGameResult;
+})();
+
 // === 初始渲染 ===
 renderFeatured();
+renderEvent();
 renderMenu('all');
+
+// === 全页星场 ===
+(function(){
+  const c=document.getElementById('bgStars'),ctx=c.getContext('2d');
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();window.addEventListener('resize',resize);
+  const stars=[];
+  for(let i=0;i<150;i++)stars.push({x:Math.random()*2000,y:Math.random()*2000,r:Math.random()*1.5+0.5,p:Math.random()*Math.PI*2,s:0.005+Math.random()*0.015});
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    for(const s of stars){s.p+=s.s;const a=0.08+Math.sin(s.p)*0.12;if(a>0){ctx.beginPath();ctx.arc(s.x%c.width,s.y%c.height,s.r,0,Math.PI*2);ctx.fillStyle='rgba(178,160,134,'+a+')';ctx.fill();}}
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 
 </body>
