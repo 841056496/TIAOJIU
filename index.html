@@ -1011,9 +1011,9 @@ const levelLabels = {
 
 // === 活动酒款 ===
 const eventDrinks = [
-  { id: 'e1', name: '约定',     enName: 'Promise Fizz',    desc: '果香与气泡的浪漫盟约。伏特加的纯净托起莓桃汁的酸甜馥郁，白朗姆添一缕温润底韵，气泡水炸开细密清冽的珠帘。入口是莓果的明媚与桃子的软甜在舌尖轻舞，气泡裹着微醺缓缓升腾，余味清新如初恋的诺言。',                                                       price: 0, img: 'images/约定.jpg' },
-  { id: 'e2', name: '小狗',     enName: 'Mellow Pup',      desc: '蜜瓜甜，椰子香，像小狗摇尾的午后。蜜多利的蜜瓜清甜与马利宝的椰子奶香融成暖融融的果味基底，菠萝汁注入明媚酸度，柠檬汁划开一道明亮收尾。入口是软糯的甜润，果香层层化开，余韵干净得像被轻轻蹭了一下手心。',                                       price: 0, img: 'images/小狗.jpg' },
-  { id: 'e3', name: '螺丝起子', enName: 'Screwdriver',     desc: '橙香为鞘，烈性藏锋。伏特加的凛冽被鲜橙汁的明媚果酸温柔包裹，甜与烈在杯中短暂角力后达成默契。入口是果汁般的轻松，落喉后温热悄然攀上，像一场不动声色的微醺。',                                                                         price: 0, img: 'images/螺丝起子.jpg' },
+  { id: 'e1', name: '约定',     enName: 'Promise Fizz',    desc: '果香与气泡的浪漫盟约。伏特加的纯净托起莓桃汁的酸甜馥郁，白朗姆添一缕温润底韵，气泡水炸开细密清冽的珠帘。入口是莓果的明媚与桃子的软甜在舌尖轻舞，气泡裹着微醺缓缓升腾，余味清新如初恋的诺言。',                                                       price: 0, img: 'images/约定.jpg', thumb: 'images/约定_thumb.jpg' },
+  { id: 'e2', name: '小狗',     enName: 'Mellow Pup',      desc: '蜜瓜甜，椰子香，像小狗摇尾的午后。蜜多利的蜜瓜清甜与马利宝的椰子奶香融成暖融融的果味基底，菠萝汁注入明媚酸度，柠檬汁划开一道明亮收尾。入口是软糯的甜润，果香层层化开，余韵干净得像被轻轻蹭了一下手心。',                                       price: 0, img: 'images/小狗.jpg', thumb: 'images/小狗_thumb.jpg' },
+  { id: 'e3', name: '螺丝起子', enName: 'Screwdriver',     desc: '橙香为鞘，烈性藏锋。伏特加的凛冽被鲜橙汁的明媚果酸温柔包裹，甜与烈在杯中短暂角力后达成默契。入口是果汁般的轻松，落喉后温热悄然攀上，像一场不动声色的微醺。',                                                                         price: 0, img: 'images/螺丝起子.jpg', thumb: 'images/螺丝起子_thumb.jpg' },
 ];
 
 function renderEvent() {
@@ -1028,7 +1028,7 @@ function renderEvent() {
       <div class="event-card" onclick="openEventDetail('${drink.id}')">
         <div class="event-ribbon">限定</div>
         <div class="card-img-wrap">
-          <img src="${drink.img}" alt="${drink.name}" class="card-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <img src="${drink.thumb || drink.img}" alt="${drink.name}" class="card-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="card-img-fallback" style="display:none">🍸</div>
         </div>
         <div class="card-info">
